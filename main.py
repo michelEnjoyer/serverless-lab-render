@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 app = Flask(__name__)
 
 # Подключение к БД
-DATABASE_URL = os.environ.get('postgresql://serverless_db_til5_user:cjTr3LN4Sw14HSr4PR9pfXifO4XpIkdu@dpg-d3qttmd6ubrc7388cfeg-a/serverless_db_til5L')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     url = urlparse(DATABASE_URL)
     conn = psycopg2.connect(
@@ -56,6 +56,3 @@ def get_messages():
 
     messages = [{"id": r[0], "text": r[1], "time": r[2].isoformat()} for r in rows]
     return jsonify(messages)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
