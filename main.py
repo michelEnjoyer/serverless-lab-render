@@ -31,6 +31,11 @@ if conn:
         """)
         conn.commit()
 
+# Маршрут для Render (обязательно!)
+@app.route('/')
+def index():
+    return "Server is running", 200
+
 @app.route('/save', methods=['POST'])
 def save_message():
     if not conn:
@@ -59,4 +64,3 @@ def get_messages():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
